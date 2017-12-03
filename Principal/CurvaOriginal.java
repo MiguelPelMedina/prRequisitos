@@ -1,5 +1,6 @@
 package principal;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import interfaz.BDConnection;
@@ -43,9 +44,24 @@ public class CurvaOriginal implements curva {
 	}
     
     
-    	public CurvaOriginal(int i) {
+    	public CurvaOriginal(int i) throws ClassNotFoundException {
 		// dado un id carga el objeto de la base de datos;
     	idCurva = i;
+    	
+		BDConnection baseDatos = new BDConnection();
+		for(Object[] elemento : baseDatos.Select("SELECT * FROM curvaOriginal WHERE idCurva = "+i+";")){
+
+			this.fecha = elemento[1].toString();
+			this.Isc = Double.parseDouble(elemento[2].toString());
+			this.Voc = Double.parseDouble(elemento[3].toString());
+			this.Pmax = Double.parseDouble(elemento[4].toString());
+			this.IPmax = Double.parseDouble(elemento[5].toString());
+			this.VPmax = Double.parseDouble(elemento[6].toString());
+			this.FF = Double.parseDouble(elemento[7].toString());
+			this.temp = Double.parseDouble(elemento[8].toString());
+			this.irr = Double.parseDouble(elemento[9].toString());
+			this.modName = elemento[10].toString();
+		}
 	}
 
     
